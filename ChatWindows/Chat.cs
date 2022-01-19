@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Net;
 using System.Net.Sockets;
+using System.IO;
 
 namespace ChatProgram
 {
@@ -30,14 +31,14 @@ namespace ChatProgram
             ClientIPAddress = address;
         }
 
-        public void SaveChatHistory()
+        public void SaveChatHistory(string FolderPath)
         {
-
+            File.WriteAllLines(FolderPath, ChatHistory);
         }
 
-        public void LoadChatHistory()
+        public void LoadChatHistory(string FilePath)
         {
-
+            ChatHistory.AddRange(File.ReadAllLines(FilePath));
         }
 
         public void SendMessage(string message)
