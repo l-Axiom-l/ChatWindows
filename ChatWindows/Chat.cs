@@ -61,8 +61,9 @@ namespace ChatProgram
         public void StartClient()
         {
             IPHostEntry host = Dns.GetHostEntry(ClientIPAddress);
+            Console.WriteLine(Dns.GetHostName());
             IPAddress ipAddress = host.AddressList[0];
-            IPEndPoint remoteEP = new IPEndPoint(ipAddress, 11000);
+            IPEndPoint remoteEP = new IPEndPoint(ipAddress, 11111);
             Sender = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
             Sender.Connect(remoteEP);
             byte[] msg = Encoding.ASCII.GetBytes("Test" + "<EOF>");
@@ -76,7 +77,7 @@ namespace ChatProgram
             IPHostEntry host = Dns.GetHostEntry(ServerIPAddress);
             IPAddress ipAddress = host.AddressList[0];
             Console.WriteLine(ipAddress.ToString());
-            IPEndPoint localEndPoint = new IPEndPoint(ipAddress, 11000);
+            IPEndPoint localEndPoint = new IPEndPoint(ipAddress, 11111);
             Socket socket = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
             socket.Bind(localEndPoint);
             socket.Listen(10);
@@ -107,7 +108,7 @@ namespace ChatProgram
             // Get Host IP Address that is used to establish a connection
             // In this case, we get one IP address of localhost that is IP : 127.0.0.1
             // If a host has multiple addresses, you will get a list of addresses
-            IPHostEntry host = Dns.GetHostEntry("localhost");
+            IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());
             IPAddress ipAddress = host.AddressList[0];
             IPEndPoint localEndPoint = new IPEndPoint(ipAddress, 11000);
             
@@ -172,7 +173,7 @@ namespace ChatProgram
                 // If a host has multiple addresses, you will get a list of addresses
                 IPHostEntry host = Dns.GetHostEntry("localhost");
                 IPAddress ipAddress = host.AddressList[0];
-                IPEndPoint remoteEP = new IPEndPoint(ipAddress, 11000);
+                IPEndPoint remoteEP = new IPEndPoint(ipAddress, 11111);
 
                 // Create a TCP/IP  socket.
                 Socket sender = new Socket(ipAddress.AddressFamily,
