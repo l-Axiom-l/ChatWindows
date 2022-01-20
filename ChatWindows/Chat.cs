@@ -44,7 +44,9 @@ namespace ChatProgram
         public void SendMessage(string message)
         {
             byte[] msg = Encoding.ASCII.GetBytes(message + "<EOF>");
+            ChatHistory.Add("Send: " + message);
             Sender.Send(msg);
+            
         }
 
         public void Update()
@@ -97,7 +99,7 @@ namespace ChatProgram
                     break;
                 }
             }
-            ChatHistory.Add(data);
+            ChatHistory.Add("Received: " + data);
             goto LOOP;
         }
     }
